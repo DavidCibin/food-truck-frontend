@@ -2,6 +2,7 @@
 // @ts-expect-error
 import React from "react";
 import { useFoodTruck } from "../context/FoodTruckContext";
+import { Form } from "react-bootstrap";
 
 /** ************************************************************** */
 /* SearchByNameOrAddress Component */
@@ -14,13 +15,16 @@ export default function SearchByNameOrAddress(): JSX.Element {
   /* Render */
   return (
     <div className="my-4 min-w-80" data-testid="root">
-      <input
-        type="text"
-        className="p-2 border rounded w-full"
-        placeholder="Enter Name or Address"
-        value={nameOrAddressQuery}
-        onChange={(e) => setNameOrAddressQuery(e.target.value)}
-      />
+      <Form.Group className="mb-3">
+        <Form.Label htmlFor="longitude">Longitude</Form.Label>
+        <Form.Control
+          type="text"
+          placeholder="Enter Name or Address"
+          value={nameOrAddressQuery}
+          onChange={(e) => setNameOrAddressQuery(e.target.value)}
+          id="applicant-or-adress"
+        />
+      </Form.Group>
     </div>
   );
 }

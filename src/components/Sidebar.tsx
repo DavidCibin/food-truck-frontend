@@ -12,6 +12,7 @@ import SearchByNameOrAddress from "./SearchByNameOrAddress";
 import StatusFilter from "./StatusFilter";
 import { useFoodTruck } from "../context/FoodTruckContext";
 import SearchByGeolocation from "./SearchByGeolocation";
+import closeIcon from "../assets/close-square.svg";
 
 /** ************************************************************** */
 /* Types */
@@ -77,16 +78,15 @@ export default function Sidebar({
   /** ************************************************************** */
   /* Render */
   return (
-    <div className="w-full sm:w-96 sm:min-h-full h-auto sm:fixed sticky bg-orange-50 p-4 border-b sm:border-b-0 sm:border-r top-0 z-20">
+    <div className="w-full sm:w-96 sm:min-h-full h-auto sm:fixed sticky bg-orange-50 p-4 top-0 z-20">
       {isMobile && (
         <div className="d-flex justify-content-between align-items-center mb-3">
-          <h3 className="text-orange-400">Options</h3>
+          <h3 className="!text-orange-400">Options</h3>
           <img
-            src="/src/assets/close-square.svg"
+            src={closeIcon}
             alt="Close icon"
             onClick={() => setSidebarVisible(false)}
-            className="cursor-pointer"
-            style={{ width: "2rem", height: "2rem" }}
+            className="cursor-pointer w-7 h-7"
           />
         </div>
       )}

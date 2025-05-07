@@ -8,6 +8,8 @@ import Sidebar from "../components/Sidebar";
 import Spinner from "react-bootstrap/Spinner";
 import { haversine } from "../utils/haversine";
 import { FoodTrucks } from "../schema/foodTruck";
+import foodIcon from "../assets/food-icon.svg";
+import burgerIcon from "../assets/burger-menu.svg";
 
 /** ************************************************************** */
 /* FoodTruck Componet */
@@ -143,24 +145,24 @@ export default function FoodTruck(): JSX.Element {
             {(!isMobile || !sidebarVisible) && (
               <div className="flex items-baseline gap-2 cursor-pointer">
                 <img
-                  src="/src/assets/food-icon.svg"
+                  src={foodIcon}
                   alt="Food icon"
-                  className="mb-1 sm:w-8 sm:h-8 w-6 h-6"
+                  className="mb-1 sm:w-8 sm:h-8 w-5 h-5"
                 />
-                <h1
-                  className="sm:text-3xl text-xl text-orange-400"
+                <div
+                  className="sm:text-4xl text-2xl text-[#ffa500]"
                   style={{
                     fontFamily: "cursive",
                   }}
                 >
                   Mobile Food Finder
-                </h1>
+                </div>
               </div>
             )}
 
             {isMobile && !sidebarVisible && (
               <img
-                src="/src/assets/burger-menu.svg"
+                src={burgerIcon}
                 alt="Menu icon"
                 onClick={() => setSidebarVisible(true)}
                 className="cursor-pointer mb-2 w-7 h-7"
