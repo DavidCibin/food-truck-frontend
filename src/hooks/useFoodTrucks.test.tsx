@@ -6,7 +6,7 @@ import useFoodTrucks from "../../src/hooks/useFoodTrucks";
 
 // Mock the axios module
 jest.mock("axios");
-const mockedAxios = axios as jest.Mocked<typeof axios>; // Explicitly type the mock
+const mockedAxios = axios as jest.Mocked<typeof axios>;
 
 // Mock the schema validation
 jest.mock("../../src/schema/foodTruck", () => ({
@@ -14,7 +14,7 @@ jest.mock("../../src/schema/foodTruck", () => ({
     safeParse: jest.fn(),
   },
 }));
-const mockedSafeParse = FoodTruckArraySchema.safeParse as jest.Mock; // Explicitly type the mock
+const mockedSafeParse = FoodTruckArraySchema.safeParse as jest.Mock;
 
 describe("useFoodTrucks", () => {
   beforeEach(() => {
