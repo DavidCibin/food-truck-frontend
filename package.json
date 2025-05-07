@@ -11,12 +11,11 @@
     "lint": "eslint . --ext .ts,.tsx",
     "format": "prettier --write .",
     "preview": "vite preview",
-    "test": "jest --watchAll",
-    "build:css": "tailwindcss -i ./src/App.css -o ./dist/index.css",
-    "watch:css": "tailwindcss -i ./src/App.css -o ./dist/index.css --watch"
+    "test": "jest --watchAll"
   },
   "dependencies": {
     "@tailwindcss/postcss": "^4.1.5",
+    "@tailwindcss/vite": "^4.1.5",
     "@testing-library/react-hooks": "^7.0.2",
     "axios": "^1.9.0",
     "react": "^18.3.1",

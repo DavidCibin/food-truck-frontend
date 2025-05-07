@@ -113,7 +113,7 @@ export default function FoodTruck(): JSX.Element {
         setNameOrAddressQuery,
         geolocationQuery,
         setGeolocationQuery,
-        allStatus: fetchedAllStatus, // Use fetchedAllStatus from the hook
+        allStatus: fetchedAllStatus,
         statusFilter,
         setStatusFilter,
         viewOption,
