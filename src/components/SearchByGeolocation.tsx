@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-expect-error
 import React, { useEffect, useState } from "react";
 import { Button, Form, Alert } from "react-bootstrap";
 import { useFoodTruck } from "../context/FoodTruckContext";

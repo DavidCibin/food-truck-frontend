@@ -24,7 +24,7 @@ export default function useFoodTrucks(): UseFoodTrucksResult {
       setLoading(true);
       try {
         const response = await axios.get(
-          "http://127.0.0.1:8000/api/foodtrucks",
+          "https://food-truck-backend-service-560894613073.us-south1.run.app/api/foodtrucks",
         );
         const parsed = FoodTruckArraySchema.safeParse(response.data);
         if (!parsed.success) {

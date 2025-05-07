@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-expect-error
 import React from "react";
 import { Container, Row, Col, Card, CardGroup } from "react-bootstrap";
 import { FoodTrucks } from "../schema/foodTruck";
