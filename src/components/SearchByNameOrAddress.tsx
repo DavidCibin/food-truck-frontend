@@ -16,7 +16,6 @@ export default function SearchByNameOrAddress(): JSX.Element {
   return (
     <div className="my-4 min-w-80" data-testid="root">
       <Form.Group className="mb-3">
-        <Form.Label htmlFor="longitude">Longitude</Form.Label>
         <Form.Control
           type="text"
           placeholder="Enter Name or Address"
