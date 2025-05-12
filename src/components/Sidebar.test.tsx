@@ -1,19 +1,20 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
+import { vi, type Mock } from "vitest";
 import "@testing-library/jest-dom";
 import Sidebar from "./Sidebar";
 import { FoodTruckContext } from "../context/FoodTruckContext";
 
 const mockContextValue = {
   nameOrAddressQuery: "",
-  setNameOrAddressQuery: jest.fn(),
+  setNameOrAddressQuery: vi.fn(),
   geolocationQuery: [],
-  setGeolocationQuery: jest.fn(),
+  setGeolocationQuery: vi.fn(),
   allStatus: ["APPROVED", "PENDING", "REJECTED"],
   statusFilter: [],
-  setStatusFilter: jest.fn(),
+  setStatusFilter: vi.fn(),
   viewOption: "nameOrAddress",
-  setViewOption: jest.fn(),
+  setViewOption: vi.fn(),
 };
 
 const renderWithContext = (
@@ -27,55 +28,55 @@ const renderWithContext = (
   );
 };
 
-jest.mock("./SearchByNameOrAddress", () => () => (
-  <div data-testid="search-by-name">Search by Name or Address</div>
+vi.mock("./SearchByNameOrAddress", () => ({
+  default: () => <div data-testid="search-by-name">Mocked SearchByNameOrAddress</div>,
+}));
+
+vi.mock("./SearchByGeolocation", () => ({
+  default: () => 
+    <div data-testid="search-by-geolocation">
+      Search by Latitude and Longitude
+    </div>
+  }
 ));
-jest.mock("./SearchByGeolocation", () => () => (
-  <div data-testid="search-by-geolocation">
-    Search by Latitude and Longitude
-  </div>
-));
-jest.mock(
-  "./StatusFilter",
-  () =>
-    (props: {
-      allStatus: string[];
-      statusFilter: string[];
-      setStatusFilter: (filter: string[]) => void;
-    }) => (
-      <div data-testid="status-filter">
-        Filter by Status:
-        {props.allStatus.map((status: string) => (
-          <label key={status}>
-            <input
-              type="checkbox"
-              value={status}
-              checked={props.statusFilter.includes(status)}
-              onChange={(e) => {
-                const newFilter = e.target.checked
-                  ? [...props.statusFilter, status]
-                  : props.statusFilter.filter((s) => s !== status);
-                if (props.setStatusFilter) {
-                  props.setStatusFilter(newFilter);
-                }
-              }}
-            />
-            {status}
-          </label>
-        ))}
-      </div>
-    ),
-);
+vi.mock("./StatusFilter", () => ({
+  default: (props: {
+    allStatus: string[];
+    statusFilter: string[];
+    setStatusFilter: (filter: string[]) => void;
+  }) => (
+    <div data-testid="status-filter">
+      Filter by Status:
+      {props.allStatus.map((status: string) => (
+        <label key={status}>
+          <input
+            type="checkbox"
+            value={status}
+            checked={props.statusFilter.includes(status)}
+            onChange={(e) => {
+              const newFilter = e.target.checked
+                ? [...props.statusFilter, status]
+                : props.statusFilter.filter((s) => s !== status);
+              props.setStatusFilter(newFilter);
+            }}
+          />
+          {status}
+        </label>
+      ))}
+    </div>
+  ),
+}));
+
 
 describe("Sidebar Component", () => {
-  let setSidebarVisibleMock: jest.Mock;
-  let setViewOptionMock: jest.Mock;
-  let setStatusFilterMock: jest.Mock;
+  let setSidebarVisibleMock: Mock;
+  let setViewOptionMock: Mock;
+  let setStatusFilterMock: Mock;
 
   beforeEach(() => {
-    setSidebarVisibleMock = jest.fn();
-    setViewOptionMock = jest.fn();
-    setStatusFilterMock = jest.fn();
+    setSidebarVisibleMock = vi.fn();
+    setViewOptionMock = vi.fn();
+    setStatusFilterMock = vi.fn();
     mockContextValue.setViewOption = setViewOptionMock;
     mockContextValue.setStatusFilter = setStatusFilterMock;
   });

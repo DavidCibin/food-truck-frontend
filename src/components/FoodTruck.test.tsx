@@ -1,37 +1,36 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-expect-error
-import React from "react";
 import { render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom";
+import { vi, type Mock } from "vitest";
 import FoodTruck from "./FoodTruck";
 import useFoodTrucks from "../hooks/useFoodTrucks";
 import FoodTruckProvider from "../context/FoodTruckProvider";
+import FoodTruckList from "./FoodTruckList.tsx";
+
+
 
 // Mock the useFoodTrucks hook
-jest.mock("../hooks/useFoodTrucks");
-const mockUseFoodTrucks = useFoodTrucks as jest.Mock;
+vi.mock("../hooks/useFoodTrucks");
+const mockUseFoodTrucks = useFoodTrucks as Mock;
 
 // Mock the FoodTruckList component to avoid rendering its logic
-jest.mock("../components/FoodTruckList", () => ({
+vi.mock("./FoodTruckList.tsx", () => ({
   __esModule: true,
-  default: jest.fn(() => (
+  default: vi.fn(() => (
     <div data-testid="food-truck-list">FoodTruckList</div>
   )),
 }));
-// eslint-disable-next-line @typescript-eslint/no-require-imports
-const mockFoodTruckList = require("../components/FoodTruckList")
-  .default as jest.Mock;
+ 
+const mockFoodTruckList = FoodTruckList as Mock;
 
 // Mock the Sidebar component to avoid rendering its logic
-jest.mock("../components/Sidebar", () => ({
+vi.mock("../components/Sidebar", () => ({
   __esModule: true,
-  default: jest.fn(() => <div data-testid="sidebar">Sidebar</div>),
+  default: vi.fn(() => <div data-testid="sidebar">Sidebar</div>),
 }));
 
 // Directly mock the Spinner component
-jest.mock("react-bootstrap/Spinner", () => ({
+vi.mock("react-bootstrap/Spinner", () => ({
   __esModule: true,
-  default: jest.fn(() => (
+  default: vi.fn(() => (
     <div data-testid="spinner" className="spinner-grow">
       Loading...
     </div>
@@ -40,7 +39,7 @@ jest.mock("react-bootstrap/Spinner", () => ({
 
 describe("FoodTruck Component", () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     // Reset the mock implementation before each test
     mockUseFoodTrucks.mockReturnValue({
       foodTrucks: [],
@@ -62,14 +61,14 @@ describe("FoodTruck Component", () => {
       <FoodTruckProvider
         value={{
           nameOrAddressQuery: "",
-          setNameOrAddressQuery: jest.fn(),
+          setNameOrAddressQuery: vi.fn(),
           geolocationQuery: [],
-          setGeolocationQuery: jest.fn(),
+          setGeolocationQuery: vi.fn(),
           allStatus: [],
           statusFilter: [],
-          setStatusFilter: jest.fn(),
+          setStatusFilter: vi.fn(),
           viewOption: "nameOrAddress",
-          setViewOption: jest.fn(),
+          setViewOption: vi.fn(),
         }}
       >
         <FoodTruck />
@@ -110,14 +109,14 @@ describe("FoodTruck Component", () => {
       <FoodTruckProvider
         value={{
           nameOrAddressQuery: "",
-          setNameOrAddressQuery: jest.fn(),
+          setNameOrAddressQuery: vi.fn(),
           geolocationQuery: [],
-          setGeolocationQuery: jest.fn(),
+          setGeolocationQuery: vi.fn(),
           allStatus: mockAllStatusData, // Provide the mockAllStatusData here
           statusFilter: [],
-          setStatusFilter: jest.fn(),
+          setStatusFilter: vi.fn(),
           viewOption: "nameOrAddress",
-          setViewOption: jest.fn(),
+          setViewOption: vi.fn(),
         }}
       >
         <FoodTruck />
@@ -175,14 +174,14 @@ describe("FoodTruck Component", () => {
       <FoodTruckProvider
         value={{
           nameOrAddressQuery: "",
-          setNameOrAddressQuery: jest.fn(),
+          setNameOrAddressQuery: vi.fn(),
           geolocationQuery: [],
-          setGeolocationQuery: jest.fn(),
+          setGeolocationQuery: vi.fn(),
           allStatus: mockAllStatusData,
           statusFilter: [],
-          setStatusFilter: jest.fn(),
+          setStatusFilter: vi.fn(),
           viewOption: "nameOrAddress",
-          setViewOption: jest.fn(),
+          setViewOption: vi.fn(),
         }}
       >
         <FoodTruck />

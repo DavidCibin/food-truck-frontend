@@ -1,19 +1,19 @@
-import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
+import { vi, type Mock } from "vitest";
 import "@testing-library/jest-dom";
 import SearchByGeolocation from "./SearchByGeolocation";
 import { FoodTruckContext } from "../context/FoodTruckContext";
 
 const mockContextValue = {
   nameOrAddressQuery: "",
-  setNameOrAddressQuery: jest.fn(),
+  setNameOrAddressQuery: vi.fn(),
   geolocationQuery: [],
-  setGeolocationQuery: jest.fn(),
+  setGeolocationQuery: vi.fn(),
   allStatus: [],
   statusFilter: [],
-  setStatusFilter: jest.fn(),
+  setStatusFilter: vi.fn(),
   viewOption: "Geolocation",
-  setViewOption: jest.fn(),
+  setViewOption: vi.fn(),
 };
 
 const renderWithContext = (
@@ -28,10 +28,10 @@ const renderWithContext = (
 };
 
 describe("SearchByGeolocation Component", () => {
-  let setGeolocationQueryMock: jest.Mock;
+  let setGeolocationQueryMock: Mock;
 
   beforeEach(() => {
-    setGeolocationQueryMock = jest.fn();
+    setGeolocationQueryMock = vi.fn();
     mockContextValue.setGeolocationQuery = setGeolocationQueryMock;
   });
 

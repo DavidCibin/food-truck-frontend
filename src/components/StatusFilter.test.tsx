@@ -1,13 +1,12 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-expect-error
-import React from "react";
+
 import { render, screen, fireEvent } from "@testing-library/react";
+import { vi } from "vitest"
 import "@testing-library/jest-dom";
 import StatusFilter from "./StatusFilter";
 
 describe("StatusFilter Component", () => {
   const allStatuses = ["APPROVED", "PENDING", "REJECTED"];
-  const mockSetStatusFilter = jest.fn();
+  const mockSetStatusFilter = vi.fn();
 
   test("renders without crashing", () => {
     render(

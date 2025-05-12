@@ -1,19 +1,20 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
+import { vi, type Mock } from "vitest";
 import "@testing-library/jest-dom";
 import SearchByNameOrAddress from "./SearchByNameOrAddress";
 import { FoodTruckContext } from "../context/FoodTruckContext";
 
 const mockContextValue = {
   nameOrAddressQuery: "",
-  setNameOrAddressQuery: jest.fn(),
+  setNameOrAddressQuery: vi.fn(),
   geolocationQuery: [],
-  setGeolocationQuery: jest.fn(),
+  setGeolocationQuery: vi.fn(),
   allStatus: [],
   statusFilter: [],
-  setStatusFilter: jest.fn(),
+  setStatusFilter: vi.fn(),
   viewOption: "nameOrAddress",
-  setViewOption: jest.fn(),
+  setViewOption: vi.fn(),
 };
 
 const renderWithContext = (
@@ -28,10 +29,10 @@ const renderWithContext = (
 };
 
 describe("SearchByNameOrAddress Component", () => {
-  let setNameOrAddressQueryMock: jest.Mock;
+  let setNameOrAddressQueryMock: Mock;
 
   beforeEach(() => {
-    setNameOrAddressQueryMock = jest.fn();
+    setNameOrAddressQueryMock = vi.fn();
     mockContextValue.setNameOrAddressQuery = setNameOrAddressQueryMock;
   });
 

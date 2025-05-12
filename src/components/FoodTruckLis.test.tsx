@@ -1,8 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-expect-error
-import React from "react";
 import { render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom";
 import FoodTruckList from "./FoodTruckList";
 import { FoodTrucks } from "../schema/foodTruck";
 
@@ -91,14 +87,16 @@ describe("FoodTruckList Component", () => {
     render(<FoodTruckList foodTrucks={mockFoodTrucks} />);
     const approvedIndicator =
       screen.getByText("Status: approved").nextElementSibling;
-    expect(approvedIndicator).toHaveStyle({ backgroundColor: "green" });
-
+    expect(getComputedStyle(approvedIndicator!).backgroundColor).toBe("rgb(0, 128, 0)"); // rgb for "green" color
+    
     const pendingIndicator =
-      screen.getByText("Status: pending").nextElementSibling;
-    expect(pendingIndicator).toHaveStyle({ backgroundColor: "blue" });
-
+    screen.getByText("Status: pending").nextElementSibling;
+    console.log(getComputedStyle(pendingIndicator!).backgroundColor);
+    expect(getComputedStyle(pendingIndicator!).backgroundColor).toBe("rgb(0, 0, 255)"); // rgb for "blue" color
+    
     const deniedIndicator =
-      screen.getByText("Status: denied").nextElementSibling;
-    expect(deniedIndicator).toHaveStyle({ backgroundColor: "red" });
+    screen.getByText("Status: denied").nextElementSibling;
+    console.log(getComputedStyle(deniedIndicator!).backgroundColor);
+    expect(getComputedStyle(deniedIndicator!).backgroundColor).toBe("rgb(255, 0, 0)"); // rgb for "red" color
   });
 });

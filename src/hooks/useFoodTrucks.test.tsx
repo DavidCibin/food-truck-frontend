@@ -1,24 +1,25 @@
 import { renderHook, waitFor } from "@testing-library/react";
+import { vi, type Mock, type Mocked } from "vitest";
 import "jest";
 import axios from "axios";
 import { FoodTruckArraySchema } from "../../src/schema/foodTruck";
 import useFoodTrucks from "../../src/hooks/useFoodTrucks";
 
 // Mock the axios module
-jest.mock("axios");
-const mockedAxios = axios as jest.Mocked<typeof axios>;
+vi.mock("axios");
+const mockedAxios = axios as Mocked<typeof axios>;
 
 // Mock the schema validation
-jest.mock("../../src/schema/foodTruck", () => ({
+vi.mock("../../src/schema/foodTruck", () => ({
   FoodTruckArraySchema: {
-    safeParse: jest.fn(),
+    safeParse: vi.fn(),
   },
 }));
-const mockedSafeParse = FoodTruckArraySchema.safeParse as jest.Mock;
+const mockedSafeParse = FoodTruckArraySchema.safeParse as Mock;
 
 describe("useFoodTrucks", () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   test("should fetch food trucks successfully and update state", async () => {
@@ -52,7 +53,7 @@ describe("useFoodTrucks", () => {
     expect(result.current.allStatus).toEqual(["APPROVED", "PENDING"]);
     expect(mockedAxios.get).toHaveBeenCalledTimes(1);
     expect(mockedAxios.get).toHaveBeenCalledWith(
-      "http://127.0.0.1:8000/api/foodtrucks",
+      "https://food-truck-backend-service-560894613073.us-south1.run.app/api/foodtrucks",
     );
     expect(mockedSafeParse).toHaveBeenCalledWith(mockFoodTrucks);
   });
@@ -73,7 +74,7 @@ describe("useFoodTrucks", () => {
     expect(result.current.allStatus).toEqual([]);
     expect(mockedAxios.get).toHaveBeenCalledTimes(1);
     expect(mockedAxios.get).toHaveBeenCalledWith(
-      "http://127.0.0.1:8000/api/foodtrucks",
+      "https://food-truck-backend-service-560894613073.us-south1.run.app/api/foodtrucks",
     );
     expect(mockedSafeParse).not.toHaveBeenCalled();
   });
@@ -86,7 +87,7 @@ describe("useFoodTrucks", () => {
       success: false,
       error: "Schema validation failed",
     });
-    const consoleSpy = jest.spyOn(console, "error");
+    const consoleSpy = vi.spyOn(console, "error");
 
     const { result } = renderHook(() => useFoodTrucks());
 
@@ -100,7 +101,7 @@ describe("useFoodTrucks", () => {
     expect(result.current.allStatus).toEqual([]);
     expect(mockedAxios.get).toHaveBeenCalledTimes(1);
     expect(mockedAxios.get).toHaveBeenCalledWith(
-      "http://127.0.0.1:8000/api/foodtrucks",
+      "https://food-truck-backend-service-560894613073.us-south1.run.app/api/foodtrucks",
     );
     expect(mockedSafeParse).toHaveBeenCalledWith(mockInvalidData);
     expect(consoleSpy).toHaveBeenCalledWith(

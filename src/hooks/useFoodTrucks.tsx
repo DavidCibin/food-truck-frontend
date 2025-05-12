@@ -34,9 +34,9 @@ export default function useFoodTrucks(): UseFoodTrucksResult {
         const trucks = parsed.data;
         const statuses = [
           ...new Set(
-            trucks.map((truck) => truck.status?.toUpperCase()).filter(Boolean),
+            trucks.map((truck: FoodTrucks) => truck.status?.toUpperCase()).filter(Boolean),
           ),
-        ];
+        ] as string[];
         setFoodTrucks(trucks);
         setAllStatus(statuses);
       } catch (err) {

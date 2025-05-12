@@ -1,6 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-expect-error
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import useFoodTrucks from "../hooks/useFoodTrucks";
 import FoodTruckList from "../components/FoodTruckList";
 import FoodTruckProvider from "../context/FoodTruckProvider";
