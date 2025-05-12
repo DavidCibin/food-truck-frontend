@@ -29,7 +29,7 @@ const colorMap: StatusColorMap = {
 
 /** ************************************************************** */
 /* FoodTruckList Component */
-function FoodTruckList({
+export default function FoodTruckList({
   foodTrucks,
 }: FoodTruckListProps): JSX.Element {
   /** ************************************************************** */
@@ -91,5 +91,3 @@ function FoodTruckList({
     </div>
   );
 }
-
-export default FoodTruckList
